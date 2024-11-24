@@ -6,8 +6,8 @@ import {
   useSelector,
   Provider,
 } from "react-redux";
-import globalReducer from "@/state";
-import { api } from "@/state/api";
+import globalReducer from "../state";
+import { api } from "../state/api";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 import {
@@ -58,12 +58,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const makeStore = () => {
   return configureStore({
     reducer: persistedReducer,
-    middleware: (getDefault) =>
-      getDefault({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }).concat(api.middleware),
   });
 };
 
